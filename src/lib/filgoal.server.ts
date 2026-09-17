@@ -20,7 +20,7 @@ export {
   type TeamKind,
 } from "./teams";
 
-import type { TeamConfig } from "./teams";
+import type { TeamConfig, TeamKind } from "./teams";
 
 /* ---------------------------------- أنواع --------------------------------- */
 
