@@ -381,19 +381,35 @@ export function parseTeamMatches(html: string): Match[] {
     .filter((m): m is Match => m !== null);
 }
 
+/**
+ * قائمة اللاعبين من صفحة /teams/{id}/players.
+ * صفحات المنتخبات بتقسم اللاعبين على عدة <tbody> لكل بطولة، والأندية بتبان في tbody واحد،
+ * والاسم مرة داخل <span> ومرة نص جوه <a> — فبنتعامل مع الشكلين.
+ */
 export function parseSquad(html: string): SquadPlayer[] {
-  const body = html.match(/قائمة اللاعبين[\s\S]*?<tbody[^>]*>([\s\S]*?)<\/tbody>/i)?.[1] ?? "";
-  const rows = [...body.matchAll(/<tr>([\s\S]*?)<\/tr>/gi)].map((m) => m[1]!);
+  const table =
+    html.match(/قائمة اللاعبين[\s\S]*?<table[^>]*>([\s\S]*?)<\/table>/i)?.[1] ??
+    html.match(/قائمة اللاعبين([\s\S]*)/i)?.[1] ??
+    "";
+  const bodies = [...table.matchAll(/<tbody[^>]*>([\s\S]*?)<\/tbody>/gi)].map((m) => m[1]!);
+  const rows = (bodies.length > 0 ? bodies : [table]).flatMap((body) =>
+    [...body.matchAll(/<tr>([\s\S]*?)<\/tr>/gi)].map((m) => m[1]!),
+  );
   const players = rows
     .map((row): SquadPlayer | null => {
-      const cells = [...row.matchAll(/<td>([\s\S]*?)<\/td>/gi)].map((m) => m[1]!);
+      const cells = [...row.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((m) => m[1]!);
       if (cells.length < 4) return null;
-      const link = cells[1]!.match(/href="(\/players\/(\d+)\/[^"]*)"/i);
+      const nameCell = cells[1]!;
+      const link = nameCell.match(/href="(\/players\/(\d+)\/[^"]*)"/i);
       if (!link) return null;
-      const photo = cells[1]!.match(/data-src="([^"]+)"/i)?.[1];
+      const photo = nameCell.match(/data-src="([^"]+)"/i)?.[1];
+      const spanName = decode(nameCell.match(/<span>([\s\S]*?)<\/span>/i)?.[1] ?? "");
+      const anchorName = decode(
+        nameCell.match(/<a[^>]*>([\s\S]*?)<\/a>/i)?.[1]?.replace(/<img[^>]*>/gi, "") ?? "",
+      );
       return {
         id: Number(link[2]),
-        name: decode(cells[1]!.match(/<span>([\s\S]*?)<\/span>/i)?.[1] ?? ""),
+        name: spanName || anchorName,
         number: num(decode(cells[0]!)),
         position: decode(cells[2]!) || "—",
         nationality: decode(cells[3]!) || "—",
