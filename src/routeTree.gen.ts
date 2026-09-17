@@ -10,33 +10,181 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicIndexRouteImport } from './routes/api/public/index'
+import { Route as ApiPublicTeamsRouteImport } from './routes/api/public/teams'
+import { Route as ApiPublicMatchesMatchIdRouteImport } from './routes/api/public/matches.$matchId'
+import { Route as ApiPublicPlayersPlayerIdRouteImport } from './routes/api/public/players.$playerId'
+import { Route as ApiPublicStandingsLeagueIdRouteImport } from './routes/api/public/standings.$leagueId'
+import { Route as ApiPublicTeamsTeamIdRouteImport } from './routes/api/public/teams.$teamId'
+import { Route as ApiPublicTeamsTeamIdMatchesRouteImport } from './routes/api/public/teams.$teamId.matches'
+import { Route as ApiPublicTeamsTeamIdNewsRouteImport } from './routes/api/public/teams.$teamId.news'
+import { Route as ApiPublicTeamsTeamIdOverviewRouteImport } from './routes/api/public/teams.$teamId.overview'
+import { Route as ApiPublicTeamsTeamIdSquadRouteImport } from './routes/api/public/teams.$teamId.squad'
+import { Route as ApiPublicTeamsTeamIdStandingsRouteImport } from './routes/api/public/teams.$teamId.standings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicIndexRoute = ApiPublicIndexRouteImport.update({
+  id: '/api/public/',
+  path: '/api/public/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicTeamsRoute = ApiPublicTeamsRouteImport.update({
+  id: '/api/public/teams',
+  path: '/api/public/teams',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicMatchesMatchIdRoute = ApiPublicMatchesMatchIdRouteImport.update({
+  id: '/api/public/matches/$matchId',
+  path: '/api/public/matches/$matchId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicPlayersPlayerIdRoute =
+  ApiPublicPlayersPlayerIdRouteImport.update({
+    id: '/api/public/players/$playerId',
+    path: '/api/public/players/$playerId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicStandingsLeagueIdRoute =
+  ApiPublicStandingsLeagueIdRouteImport.update({
+    id: '/api/public/standings/$leagueId',
+    path: '/api/public/standings/$leagueId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicTeamsTeamIdRoute = ApiPublicTeamsTeamIdRouteImport.update({
+  id: '/$teamId',
+  path: '/$teamId',
+  getParentRoute: () => ApiPublicTeamsRoute,
+} as any)
+const ApiPublicTeamsTeamIdMatchesRoute =
+  ApiPublicTeamsTeamIdMatchesRouteImport.update({
+    id: '/matches',
+    path: '/matches',
+    getParentRoute: () => ApiPublicTeamsTeamIdRoute,
+  } as any)
+const ApiPublicTeamsTeamIdNewsRoute =
+  ApiPublicTeamsTeamIdNewsRouteImport.update({
+    id: '/news',
+    path: '/news',
+    getParentRoute: () => ApiPublicTeamsTeamIdRoute,
+  } as any)
+const ApiPublicTeamsTeamIdOverviewRoute =
+  ApiPublicTeamsTeamIdOverviewRouteImport.update({
+    id: '/overview',
+    path: '/overview',
+    getParentRoute: () => ApiPublicTeamsTeamIdRoute,
+  } as any)
+const ApiPublicTeamsTeamIdSquadRoute =
+  ApiPublicTeamsTeamIdSquadRouteImport.update({
+    id: '/squad',
+    path: '/squad',
+    getParentRoute: () => ApiPublicTeamsTeamIdRoute,
+  } as any)
+const ApiPublicTeamsTeamIdStandingsRoute =
+  ApiPublicTeamsTeamIdStandingsRouteImport.update({
+    id: '/standings',
+    path: '/standings',
+    getParentRoute: () => ApiPublicTeamsTeamIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/teams': typeof ApiPublicTeamsRouteWithChildren
+  '/api/public/': typeof ApiPublicIndexRoute
+  '/api/public/matches/$matchId': typeof ApiPublicMatchesMatchIdRoute
+  '/api/public/players/$playerId': typeof ApiPublicPlayersPlayerIdRoute
+  '/api/public/standings/$leagueId': typeof ApiPublicStandingsLeagueIdRoute
+  '/api/public/teams/$teamId': typeof ApiPublicTeamsTeamIdRouteWithChildren
+  '/api/public/teams/$teamId/matches': typeof ApiPublicTeamsTeamIdMatchesRoute
+  '/api/public/teams/$teamId/news': typeof ApiPublicTeamsTeamIdNewsRoute
+  '/api/public/teams/$teamId/overview': typeof ApiPublicTeamsTeamIdOverviewRoute
+  '/api/public/teams/$teamId/squad': typeof ApiPublicTeamsTeamIdSquadRoute
+  '/api/public/teams/$teamId/standings': typeof ApiPublicTeamsTeamIdStandingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/teams': typeof ApiPublicTeamsRouteWithChildren
+  '/api/public': typeof ApiPublicIndexRoute
+  '/api/public/matches/$matchId': typeof ApiPublicMatchesMatchIdRoute
+  '/api/public/players/$playerId': typeof ApiPublicPlayersPlayerIdRoute
+  '/api/public/standings/$leagueId': typeof ApiPublicStandingsLeagueIdRoute
+  '/api/public/teams/$teamId': typeof ApiPublicTeamsTeamIdRouteWithChildren
+  '/api/public/teams/$teamId/matches': typeof ApiPublicTeamsTeamIdMatchesRoute
+  '/api/public/teams/$teamId/news': typeof ApiPublicTeamsTeamIdNewsRoute
+  '/api/public/teams/$teamId/overview': typeof ApiPublicTeamsTeamIdOverviewRoute
+  '/api/public/teams/$teamId/squad': typeof ApiPublicTeamsTeamIdSquadRoute
+  '/api/public/teams/$teamId/standings': typeof ApiPublicTeamsTeamIdStandingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/teams': typeof ApiPublicTeamsRouteWithChildren
+  '/api/public/': typeof ApiPublicIndexRoute
+  '/api/public/matches/$matchId': typeof ApiPublicMatchesMatchIdRoute
+  '/api/public/players/$playerId': typeof ApiPublicPlayersPlayerIdRoute
+  '/api/public/standings/$leagueId': typeof ApiPublicStandingsLeagueIdRoute
+  '/api/public/teams/$teamId': typeof ApiPublicTeamsTeamIdRouteWithChildren
+  '/api/public/teams/$teamId/matches': typeof ApiPublicTeamsTeamIdMatchesRoute
+  '/api/public/teams/$teamId/news': typeof ApiPublicTeamsTeamIdNewsRoute
+  '/api/public/teams/$teamId/overview': typeof ApiPublicTeamsTeamIdOverviewRoute
+  '/api/public/teams/$teamId/squad': typeof ApiPublicTeamsTeamIdSquadRoute
+  '/api/public/teams/$teamId/standings': typeof ApiPublicTeamsTeamIdStandingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/api/public/teams'
+    | '/api/public/'
+    | '/api/public/matches/$matchId'
+    | '/api/public/players/$playerId'
+    | '/api/public/standings/$leagueId'
+    | '/api/public/teams/$teamId'
+    | '/api/public/teams/$teamId/matches'
+    | '/api/public/teams/$teamId/news'
+    | '/api/public/teams/$teamId/overview'
+    | '/api/public/teams/$teamId/squad'
+    | '/api/public/teams/$teamId/standings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/api/public/teams'
+    | '/api/public'
+    | '/api/public/matches/$matchId'
+    | '/api/public/players/$playerId'
+    | '/api/public/standings/$leagueId'
+    | '/api/public/teams/$teamId'
+    | '/api/public/teams/$teamId/matches'
+    | '/api/public/teams/$teamId/news'
+    | '/api/public/teams/$teamId/overview'
+    | '/api/public/teams/$teamId/squad'
+    | '/api/public/teams/$teamId/standings'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/public/teams'
+    | '/api/public/'
+    | '/api/public/matches/$matchId'
+    | '/api/public/players/$playerId'
+    | '/api/public/standings/$leagueId'
+    | '/api/public/teams/$teamId'
+    | '/api/public/teams/$teamId/matches'
+    | '/api/public/teams/$teamId/news'
+    | '/api/public/teams/$teamId/overview'
+    | '/api/public/teams/$teamId/squad'
+    | '/api/public/teams/$teamId/standings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicTeamsRoute: typeof ApiPublicTeamsRouteWithChildren
+  ApiPublicIndexRoute: typeof ApiPublicIndexRoute
+  ApiPublicMatchesMatchIdRoute: typeof ApiPublicMatchesMatchIdRoute
+  ApiPublicPlayersPlayerIdRoute: typeof ApiPublicPlayersPlayerIdRoute
+  ApiPublicStandingsLeagueIdRoute: typeof ApiPublicStandingsLeagueIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +196,124 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/': {
+      id: '/api/public/'
+      path: '/api/public'
+      fullPath: '/api/public/'
+      preLoaderRoute: typeof ApiPublicIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/teams': {
+      id: '/api/public/teams'
+      path: '/api/public/teams'
+      fullPath: '/api/public/teams'
+      preLoaderRoute: typeof ApiPublicTeamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/matches/$matchId': {
+      id: '/api/public/matches/$matchId'
+      path: '/api/public/matches/$matchId'
+      fullPath: '/api/public/matches/$matchId'
+      preLoaderRoute: typeof ApiPublicMatchesMatchIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/players/$playerId': {
+      id: '/api/public/players/$playerId'
+      path: '/api/public/players/$playerId'
+      fullPath: '/api/public/players/$playerId'
+      preLoaderRoute: typeof ApiPublicPlayersPlayerIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/standings/$leagueId': {
+      id: '/api/public/standings/$leagueId'
+      path: '/api/public/standings/$leagueId'
+      fullPath: '/api/public/standings/$leagueId'
+      preLoaderRoute: typeof ApiPublicStandingsLeagueIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/teams/$teamId': {
+      id: '/api/public/teams/$teamId'
+      path: '/$teamId'
+      fullPath: '/api/public/teams/$teamId'
+      preLoaderRoute: typeof ApiPublicTeamsTeamIdRouteImport
+      parentRoute: typeof ApiPublicTeamsRoute
+    }
+    '/api/public/teams/$teamId/matches': {
+      id: '/api/public/teams/$teamId/matches'
+      path: '/matches'
+      fullPath: '/api/public/teams/$teamId/matches'
+      preLoaderRoute: typeof ApiPublicTeamsTeamIdMatchesRouteImport
+      parentRoute: typeof ApiPublicTeamsTeamIdRoute
+    }
+    '/api/public/teams/$teamId/news': {
+      id: '/api/public/teams/$teamId/news'
+      path: '/news'
+      fullPath: '/api/public/teams/$teamId/news'
+      preLoaderRoute: typeof ApiPublicTeamsTeamIdNewsRouteImport
+      parentRoute: typeof ApiPublicTeamsTeamIdRoute
+    }
+    '/api/public/teams/$teamId/overview': {
+      id: '/api/public/teams/$teamId/overview'
+      path: '/overview'
+      fullPath: '/api/public/teams/$teamId/overview'
+      preLoaderRoute: typeof ApiPublicTeamsTeamIdOverviewRouteImport
+      parentRoute: typeof ApiPublicTeamsTeamIdRoute
+    }
+    '/api/public/teams/$teamId/squad': {
+      id: '/api/public/teams/$teamId/squad'
+      path: '/squad'
+      fullPath: '/api/public/teams/$teamId/squad'
+      preLoaderRoute: typeof ApiPublicTeamsTeamIdSquadRouteImport
+      parentRoute: typeof ApiPublicTeamsTeamIdRoute
+    }
+    '/api/public/teams/$teamId/standings': {
+      id: '/api/public/teams/$teamId/standings'
+      path: '/standings'
+      fullPath: '/api/public/teams/$teamId/standings'
+      preLoaderRoute: typeof ApiPublicTeamsTeamIdStandingsRouteImport
+      parentRoute: typeof ApiPublicTeamsTeamIdRoute
+    }
   }
 }
 
+interface ApiPublicTeamsTeamIdRouteChildren {
+  ApiPublicTeamsTeamIdMatchesRoute: typeof ApiPublicTeamsTeamIdMatchesRoute
+  ApiPublicTeamsTeamIdNewsRoute: typeof ApiPublicTeamsTeamIdNewsRoute
+  ApiPublicTeamsTeamIdOverviewRoute: typeof ApiPublicTeamsTeamIdOverviewRoute
+  ApiPublicTeamsTeamIdSquadRoute: typeof ApiPublicTeamsTeamIdSquadRoute
+  ApiPublicTeamsTeamIdStandingsRoute: typeof ApiPublicTeamsTeamIdStandingsRoute
+}
+
+const ApiPublicTeamsTeamIdRouteChildren: ApiPublicTeamsTeamIdRouteChildren = {
+  ApiPublicTeamsTeamIdMatchesRoute: ApiPublicTeamsTeamIdMatchesRoute,
+  ApiPublicTeamsTeamIdNewsRoute: ApiPublicTeamsTeamIdNewsRoute,
+  ApiPublicTeamsTeamIdOverviewRoute: ApiPublicTeamsTeamIdOverviewRoute,
+  ApiPublicTeamsTeamIdSquadRoute: ApiPublicTeamsTeamIdSquadRoute,
+  ApiPublicTeamsTeamIdStandingsRoute: ApiPublicTeamsTeamIdStandingsRoute,
+}
+
+const ApiPublicTeamsTeamIdRouteWithChildren =
+  ApiPublicTeamsTeamIdRoute._addFileChildren(ApiPublicTeamsTeamIdRouteChildren)
+
+interface ApiPublicTeamsRouteChildren {
+  ApiPublicTeamsTeamIdRoute: typeof ApiPublicTeamsTeamIdRouteWithChildren
+}
+
+const ApiPublicTeamsRouteChildren: ApiPublicTeamsRouteChildren = {
+  ApiPublicTeamsTeamIdRoute: ApiPublicTeamsTeamIdRouteWithChildren,
+}
+
+const ApiPublicTeamsRouteWithChildren = ApiPublicTeamsRoute._addFileChildren(
+  ApiPublicTeamsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicTeamsRoute: ApiPublicTeamsRouteWithChildren,
+  ApiPublicIndexRoute: ApiPublicIndexRoute,
+  ApiPublicMatchesMatchIdRoute: ApiPublicMatchesMatchIdRoute,
+  ApiPublicPlayersPlayerIdRoute: ApiPublicPlayersPlayerIdRoute,
+  ApiPublicStandingsLeagueIdRoute: ApiPublicStandingsLeagueIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
