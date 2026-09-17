@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { json } from "@/lib/api-response.server";
-import { TEAMS } from "@/lib/filgoal.server";
+import { TEAMS, crestUrl } from "@/lib/teams";
 
 export const Route = createFileRoute("/api/public/teams")({
   server: {
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/api/public/teams")({
               name: t.name,
               kind: t.kind,
               leagueId: t.leagueId,
-              crestUrl: `https://semedia.filgoal.com/Photos/Team/Medium/${t.id}.png`,
+              crestUrl: crestUrl(t.id),
             })),
           },
           3600,

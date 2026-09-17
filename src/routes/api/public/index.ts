@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { json } from "@/lib/api-response.server";
-import { TEAMS, DEFAULT_LEAGUE_ID } from "@/lib/filgoal.server";
+import { TEAMS, DEFAULT_LEAGUE_ID } from "@/lib/teams";
 
 const docs = {
   name: "Egyptian Football API",

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DEFAULT_LEAGUE_ID, TEAMS } from "@/lib/filgoal.server";
+import { DEFAULT_LEAGUE_ID, TEAMS } from "@/lib/teams";
 
 export const Route = createFileRoute("/")({
   head: () => ({
